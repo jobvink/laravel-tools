@@ -1,10 +1,10 @@
 <?php
 
-namespace jobvink\lumc\Listeners;
+namespace jobvink\tools\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use jobvink\lumc\Events\ParticipantEnrolled;
-use jobvink\lumc\Mail\Confirmation;
+use jobvink\tools\Events\ParticipantEnrolled;
+use jobvink\tools\Mail\Confirmation;
 
 class SendParticipantNotification
 {

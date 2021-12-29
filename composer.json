@@ -1,6 +1,6 @@
 {
-    "name": "jobvink/lumc",
-    "description": "Shared services for the lumc websites",
+    "name": "jobvink/tools",
+    "description": "Shared services for the tools websites",
     "type": "library",
     "authors": [
         {
@@ -18,13 +18,13 @@
     },
     "autoload": {
         "psr-4": {
-            "jobvink\\lumc\\": "src/"
+            "jobvink\\tools\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "jobvink\\lumc\\LumcServiceProvider"
+                "jobvink\\tools\\ToolsServiceProvider"
             ]
         }
     }

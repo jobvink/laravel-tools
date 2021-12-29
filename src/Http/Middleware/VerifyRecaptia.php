@@ -1,10 +1,10 @@
 <?php
 
-namespace jobvink\lumc\Http\Middleware;
+namespace jobvink\tools\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use jobvink\lumc\Models\FailedSignupAttempt;
+use jobvink\tools\Models\FailedSignupAttempt;
 use ReCaptcha\ReCaptcha;
 
 class VerifyRecaptia

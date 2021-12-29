@@ -1,11 +1,11 @@
 <?php
 
-namespace jobvink\lumc\Mail;
+namespace jobvink\tools\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use jobvink\lumc\Contracts\Addressable;
+use jobvink\tools\Contracts\Addressable;
 
 class Registartion extends Mailable
 {
@@ -32,7 +32,7 @@ class Registartion extends Mailable
 
         $this->subject('Acceptance nieuwe aanmelding');
 
-        return $this->view('lumc::mail/registration', [
+        return $this->view('tools::mail/registration', [
             'title' => '',
             'preheader' => 'Er is een nieuwe registartie voor het acceptance-onderzoek',
             'site' => '',

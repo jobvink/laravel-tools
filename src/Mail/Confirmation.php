@@ -1,6 +1,6 @@
 <?php
 
-namespace jobvink\lumc\Mail;
+namespace jobvink\tools\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -36,7 +36,7 @@ class Confirmation extends Mailable
 
         $this->subject('Acceptance bevestiging');
 
-        return $this->view('lumc::mail/email', [
+        return $this->view('tools::mail/email', [
             'mailable' => $this->mailable,
             'content' => '',
         ])->attach(public_path() . '/documenten/Informatie deelname ACCEPTANCE onderzoek (v8.0).pdf');

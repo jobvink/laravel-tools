@@ -384,7 +384,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Onderzoek van het LUMC en GPRI<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum en General Practitioners Research Institute</span>
+                                <span class="apple-link">Onderzoek van het tools en GPRI<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum en General Practitioners Research Institute</span>
                             </td>
                         </tr>
                     </table>

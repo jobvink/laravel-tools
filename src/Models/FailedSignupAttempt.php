@@ -1,6 +1,6 @@
 <?php
 
-namespace jobvink\lumc\Models;
+namespace jobvink\tools\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

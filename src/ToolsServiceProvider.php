@@ -1,10 +1,10 @@
 <?php
 
-namespace jobvink\lumc;
+namespace jobvink\tools;
 
 use Illuminate\Support\ServiceProvider;
 
-class LumcServiceProvider extends ServiceProvider
+class ToolsServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -23,7 +23,7 @@ class LumcServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'lumc');
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'tools');
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 

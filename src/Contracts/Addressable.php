@@ -1,6 +1,6 @@
 <?php
 
-namespace jobvink\lumc\Contracts;
+namespace jobvink\tools\Contracts;
 
 interface Addressable
 {

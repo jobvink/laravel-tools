@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use jobvink\lumc\Http\Controllers\Auth\RegisterController;
+use jobvink\tools\Http\Controllers\Auth\RegisterController;
 
 Route::group(['middleware' => ['fw-only-whitelisted', '2fa']], function () {
 

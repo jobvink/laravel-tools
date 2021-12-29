@@ -1,10 +1,10 @@
 <?php
 
-namespace jobvink\lumc\Listeners;
+namespace jobvink\tools\Listeners;
 
 use Illuminate\Support\Facades\Mail;
-use jobvink\lumc\Events\ParticipantEnrolled;
-use jobvink\lumc\Mail\Registartion;
+use jobvink\tools\Events\ParticipantEnrolled;
+use jobvink\tools\Mail\Registartion;
 
 class SendStaffNotification
 {
@@ -28,7 +28,7 @@ class SendStaffNotification
     {
         $participant = $event->participant;
 
-        Mail::to([env('LUMC_MAIL'), env('GPRI_MAIL')])
+        Mail::to([env('tools_MAIL'), env('GPRI_MAIL')])
             ->send(new Registartion($participant));
     }
 }

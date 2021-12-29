@@ -1,6 +1,6 @@
 <?php
 
-namespace jobvink\lumc\Http\Controllers\Auth;
+namespace jobvink\tools\Http\Controllers\Auth;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -60,7 +60,7 @@ class RegisterController extends Controller
         );
 
         // Pass the QR barcode image to our view
-        return view('lumc::google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);
+        return view('tools::google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);
     }
 
     public function completeRegistration(Request $request)
