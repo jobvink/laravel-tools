@@ -1,0 +1,14 @@
+{
+    "name": "jobvink/lumc",
+    "description": "Shared services for the lumc websites",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Job Vink",
+            "email": "jmcvink@gmail.com"
+        }
+    ],
+    "require": {
+        "orchestra/testbench": "^6.23"
+    }
+}
