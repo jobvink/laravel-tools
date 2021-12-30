@@ -63,12 +63,5 @@ class RegisterController extends Controller
         return view('tools::google2fa.register', ['QR_Image' => $QR_Image, 'secret' => $registration_data['google2fa_secret']]);
     }
 
-    public function completeRegistration(Request $request)
-    {
-        // add the session data back to the request input
-        $request->merge(session('registration_data'));
 
-        // Call the default laravel authentication
-        return $this->registration($request);
-    }
 }
