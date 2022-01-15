@@ -13,3 +13,5 @@ Route::group(['middleware' => ['fw-only-whitelisted', '2fa']], function () {
     })->name('2fa');
 });
 
+require __DIR__.'/auth.php';
+

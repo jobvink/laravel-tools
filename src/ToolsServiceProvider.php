@@ -2,6 +2,7 @@
 
 namespace jobvink\tools;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class ToolsServiceProvider extends ServiceProvider
@@ -24,7 +25,12 @@ class ToolsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'tools');
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        Route::group([
+            'namespace' => 'tools',
+            'middleware' => 'web',
+        ], function () {
+            $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        });
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
     }

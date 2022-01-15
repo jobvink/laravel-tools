@@ -28,5 +28,10 @@
                 "jobvink\\tools\\ToolsServiceProvider"
             ]
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     }
 }
