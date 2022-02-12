@@ -9,10 +9,10 @@
         }
     ],
     "require": {
-        "google/recaptcha": "^1.2.4",
-        "pragmarx/firewall": "^2.3.0",
-        "pragmarx/google2fa-laravel": "^1.4.1",
-        "laravel/sanctum": "^2.14.0"
+        "google/recaptcha": "^1.2",
+        "pragmarx/firewall": "^2.3",
+        "pragmarx/google2fa-laravel": "^2.0",
+        "laravel/sanctum": "^2.14"
     },
     "autoload": {
         "psr-4": {
