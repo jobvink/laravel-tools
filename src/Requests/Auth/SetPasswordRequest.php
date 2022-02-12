@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
 use jobvink\tools\Models\User;
 
-class VerificationRequest extends FormRequest
+class SetPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

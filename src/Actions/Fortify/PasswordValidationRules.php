@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Fortify;
+namespace jobvink\tools\Actions\Fortify;
 
 use Laravel\Fortify\Rules\Password;
 

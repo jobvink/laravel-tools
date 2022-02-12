@@ -13,7 +13,7 @@ use jobvink\tools\Events\UserRegistered;
 use jobvink\tools\Models\FlashMessage;
 use jobvink\tools\Models\User;
 use jobvink\tools\Requests\Auth\CompleteTwoFactorAuthenticationRequest;
-use jobvink\tools\Requests\Auth\VerificationRequest;
+use jobvink\tools\Requests\Auth\SetPasswordRequest;
 use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
 use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
 use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
         return view('tools::auth.complete', compact('request'));
     }
 
-    public function completeRegistration(VerificationRequest $request)
+    public function completeRegistration(SetPasswordRequest $request)
     {
         if ($request->validated()) {
             $user = User::find($request->route('id'));

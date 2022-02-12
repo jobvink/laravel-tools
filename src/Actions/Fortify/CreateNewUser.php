@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Actions\Fortify;
+namespace jobvink\tools\Actions\Fortify;
 
-use App\Models\User;
+use jobvink\tools\Actions\Fortify\PasswordValidationRules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use jobvink\tools\Events\UserRegistered;
+use jobvink\tools\Models\FlashMessage;
+use jobvink\tools\Models\User;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
 {
-    use PasswordValidationRules;
-
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
-     * @return \App\Models\User
+     * @param array $input
+     * @return User
      */
     public function create(array $input)
     {
@@ -29,13 +30,17 @@ class CreateNewUser implements CreatesNewUsers
                 'max:255',
                 Rule::unique(User::class),
             ],
-            'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user =  User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'password' => Hash::make($input['password']),
         ]);
+
+        event(new UserRegistered($user));
+
+        session()->flash('toast', [new FlashMessage(FlashMessage::SUCCESS, 'De gebruiker met de naam ' . $user->name . ' Heeft een email ontvangen, deze is 24 uur geldig.')]);
+
+        return $user;
     }
 }

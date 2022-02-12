@@ -18,7 +18,12 @@ class ToolsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->mergeConfigFrom(
+            __DIR__.'/config/google2fa.php', 'google2fa'
+        );
+        $this->mergeConfigFrom(
+            __DIR__.'/config/fortify.php', 'fortify'
+        );
     }
 
     /**
@@ -36,10 +41,6 @@ class ToolsServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         });
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-
-        $this->mergeConfigFrom(
-            __DIR__.'/config/google2fa.php', 'google2fa'
-        );
 
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('2fa', \PragmaRX\Google2FALaravel\Middleware::class);

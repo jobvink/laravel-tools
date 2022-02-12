@@ -19,13 +19,6 @@ use jobvink\tools\Http\Controllers\Auth\VerifyEmailController;
 //    ->middleware('auth');
 //
 //
-//Route::get('/complete-registration/password/{id}/{hash}', [RegisteredUserController::class, 'register'])
-//    ->middleware(['signed', 'throttle:6,1'])
-//    ->name('register.complete');
-//
-//Route::post('/complete-registration/password/{id}/{hash}', [RegisteredUserController::class, 'completeRegistration'])
-//    ->middleware(['throttle:6,1'])
-//    ->name('register.completed');
 //
 //Route::get('/complete-registration/2fa/{id}/{hash}', [RegisteredUserController::class, 'twoFactorAuthentication'])
 //    ->middleware(['throttle:6,1'])
