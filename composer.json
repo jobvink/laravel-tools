@@ -9,13 +9,13 @@
         }
     ],
     "require": {
-        "orchestra/testbench": "^6.23",
+        "orchestra/testbench": "^v6.24.1",
         "illuminate/support": "^8.77",
         "illuminate/routing": "^8.77",
         "google/recaptcha": "^1.2",
         "pragmarx/firewall": "^2.3",
         "pragmarx/google2fa-laravel": "^1.3",
-        "laravel/sanctum": "^2.13"
+        "laravel/sanctum": "^2.14"
     },
     "autoload": {
         "psr-4": {

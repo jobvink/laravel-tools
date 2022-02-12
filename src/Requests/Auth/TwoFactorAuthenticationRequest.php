@@ -4,6 +4,7 @@ namespace jobvink\tools\Requests\Auth;
 
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Http\FormRequest;
+use jobvink\tools\Models\User;
 use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
 use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
 use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
@@ -17,13 +18,9 @@ class TwoFactorAuthenticationRequest extends FormRequest
      */
     public function authorize()
     {
-        if (! hash_equals((string) $this->route('id'),
-                          (string) $this->user()->getKey())) {
-            return false;
-        }
+        $user = User::find($this->route('id'));
 
-        if (! hash_equals((string) $this->route('hash'),
-                          sha1($this->user()->getEmailForVerification()))) {
+        if (!hash_equals((string)$this->route('hash'), sha1($user->getEmailForVerification()))) {
             return false;
         }
 
@@ -69,7 +66,7 @@ class TwoFactorAuthenticationRequest extends FormRequest
     /**
      * Configure the validator instance.
      *
-     * @param  \Illuminate\Validation\Validator  $validator
+     * @param \Illuminate\Validation\Validator $validator
      * @return void
      */
     public function withValidator($validator)

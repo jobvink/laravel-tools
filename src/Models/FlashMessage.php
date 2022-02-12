@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class FlashMessage extends Model
 {
     const ERROR = 'error';
+    const SUCCESS = 'success';
 
     public $type;
     public $description;

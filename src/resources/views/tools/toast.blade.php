@@ -52,3 +52,21 @@
         </div>
     </div>
 @endif
+
+<script>
+    let toastClosers = document.getElementsByClassName('toast-closers')
+    for (let i = 0; i < toastClosers.length; i++) {
+        toastClosers[i].addEventListener('click')
+        let target = e.currentTarget;
+        let toast = document.getElementById(target.dataset.toast)
+        toast.remove();
+    }
+    let toasts = document.getElementsByClassName('toast')
+
+    for (let i = 0; i < toasts.length; i++) {
+        let toast = toasts[i]
+        setTimeout(function () {
+            toast.remove()
+        }, 10000)
+    }
+</script>

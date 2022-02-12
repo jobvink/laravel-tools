@@ -2,14 +2,21 @@
 
 namespace jobvink\tools\Http\Controllers\Auth;
 
+use Illuminate\Auth\DatabaseUserProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use jobvink\tools\Requests\Auth\TwoFactorAuthenticationRequest;
+use Illuminate\Validation\Rules\Password;
+use jobvink\tools\Events\UserRegistered;
+use jobvink\tools\Models\FlashMessage;
+use jobvink\tools\Models\User;
+use jobvink\tools\Requests\Auth\CompleteTwoFactorAuthenticationRequest;
 use jobvink\tools\Requests\Auth\VerificationRequest;
+use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
+use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
+use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
 
 class RegisteredUserController extends Controller
 {
@@ -26,7 +33,7 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -43,20 +50,32 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
         ]);
 
-        event(new Registered($user));
+        event(new UserRegistered($user));
+
+        session()->flash('toast', [new FlashMessage(FlashMessage::SUCCESS, 'De gebruiker met de naam ' . $user->name . ' Heeft een email ontvangen, deze is 24 uur geldig.')]);
 
         return redirect('/admin');
     }
 
-    public function completeRegistration(VerificationRequest $request) {
-        /** @var User $user */
-        $user = $request->user();
-        $user->password = Hash::make($request->get('password'));
-        $user->save();
-
-        return view('tools::auth.confirm');
+    public function register(Request $request)
+    {
+        return view('tools::auth.complete', compact('request'));
     }
 
+    public function completeRegistration(VerificationRequest $request)
+    {
+        if ($request->validated()) {
+            $user = User::find($request->route('id'));
+            $user->password = Hash::make($request->get('password'));
+            $user->markEmailAsVerified();
+            $user->save();
+        }
+
+        return redirect()->route('register.2fa', [
+            'id' => $request->route('id'),
+            'hash' => $request->route('hash')
+        ]);
+    }
 
     /**
      * Lets the user configure 2fa
@@ -64,29 +83,52 @@ class RegisteredUserController extends Controller
      * @param Request $request
      * @return mixed
      */
-    public function twoFactorAuthenticatoin(TwoFactorAuthenticationRequest $request)
+    public function twoFactorAuthentication(CompleteTwoFactorAuthenticationRequest $request)
     {
-        // add the session data back to the request input
-        $request->merge(session('registration_data'));
-
         // Initialise the 2FA class
         $google2fa = app('pragmarx.google2fa');
+
+        $user = User::find($request->route('id'));
+
+        // Save the registration data in an array
+        $registration_data = [
+            'email' => $user->getEmailForVerification()
+        ];
+
+        // Add the secret key to the registration data
+        try {
+            $registration_data["google2fa_secret"] = $google2fa->generateSecretKey();
+        } catch (IncompatibleWithGoogleAuthenticatorException $e) {
+        } catch (InvalidCharactersException $e) {
+        } catch (SecretKeyTooShortException $e) {
+        }
+
+        // Save the registration data to the user session for just the next request
+        $request->session()->flash('registration_data', $registration_data);
 
         // Generate the QR image. This is the image the user will scan with their app
         // to set up two factor authentication
         $QR_Image = $google2fa->getQRCodeInline(
             config('app.name'),
-            $request->user()->email,
-            $request->get('google2fa_secret')
+            $registration_data['email'],
+            $registration_data['google2fa_secret']
         );
 
+        $user->google2fa_secret = $registration_data['google2fa_secret'];
+        $user->save();
+
         // Pass the QR barcode image to our view
-        return view('tools::auth.2fa', ['QR_Image' => $QR_Image, 'secret' => $request->get('google2fa_secret')]);
+        return view('tools::auth.2fa', [
+            'QR_Image' => $QR_Image,
+            'secret' => $registration_data['google2fa_secret'],
+            'request' => $request
+        ]);
     }
 
-    public function complete(Request $request) {
-        Auth::login($request->user());
+    public function done(CompleteTwoFactorAuthenticationRequest $request)
+    {
+        Auth::login(User::find($request->route('id')));
 
-        return redirect('/');
+        return redirect('/admin');
     }
 }

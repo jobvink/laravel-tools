@@ -5,6 +5,10 @@ namespace jobvink\tools\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
+use jobvink\tools\Notifications\CompleteRegistration;
 
 class User extends Authenticatable
 {
@@ -39,4 +43,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendCompleteRegistrationNotification()
+    {
+        $this->notify(new CompleteRegistration);
+    }
 }

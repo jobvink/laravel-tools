@@ -2,8 +2,12 @@
 
 namespace jobvink\tools;
 
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use jobvink\tools\Events\UserRegistered;
+use jobvink\tools\Listeners\SendUserRegisteredNotification;
 
 class ToolsServiceProvider extends ServiceProvider
 {
@@ -32,6 +36,18 @@ class ToolsServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
         });
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/config/google2fa.php', 'google2fa'
+        );
+
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('2fa', \PragmaRX\Google2FALaravel\Middleware::class);
+
+        Event::listen(
+            UserRegistered::class,
+            [SendUserRegisteredNotification::class, 'handle']
+        );
 
     }
 
