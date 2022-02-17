@@ -10,7 +10,6 @@
     ],
     "require": {
         "google/recaptcha": "^1.2",
-        "pragmarx/firewall": "^2.3",
         "laravel/sanctum": "^2.14",
         "laravel/fortify": "^1.10"
     },
