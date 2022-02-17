@@ -2,10 +2,9 @@
 
 namespace jobvink\tools\Providers;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use jobvink\tools\Actions\Fortify\CreateNewUser;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use jobvink\tools\Actions\Fortify\ResetUserPassword;
