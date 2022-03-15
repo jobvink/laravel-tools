@@ -83,6 +83,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
         ->middleware(['throttle:6,1'])
         ->name('register.completed');
 
+    Route::get('/register/two-factor-qr-code/{id}/{hash}', [TwoFactorQrCodeController::class, 'show'])
+        ->name('register.two-factor.qr-code');
+
     // Email Verification...
     if (Features::enabled(Features::emailVerification())) {
         if ($enableViews) {
@@ -154,11 +157,11 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             ->middleware($twoFactorMiddleware)
             ->name('two-factor.disable');
 
-        Route::get('/user/two-factor-qr-code', [TwoFactorQrCodeController::class, 'show'])
-            ->name('register.two-factor.qr-code');
-
-        Route::get('/user/two-factor-qr-code', [TwoFactorQrCodeController::class, 'show'])
-            ->name('two-factor.qr-code');
+//        Route::get('/user/two-factor-qr-code', [TwoFactorQrCodeController::class, 'show'])
+//            ->name('register.two-factor.qr-code');
+//
+//        Route::get('/user/two-factor-qr-code', [TwoFactorQrCodeController::class, 'show'])
+//            ->name('two-factor.qr-code');
 
         Route::get('/user/two-factor-recovery-codes', [RecoveryCodeController::class, 'index'])
             ->middleware($twoFactorMiddleware)
