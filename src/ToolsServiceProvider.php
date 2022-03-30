@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use jobvink\tools\Events\UserRegistered;
 use jobvink\tools\Listeners\SendUserRegisteredNotification;
+use jobvink\tools\Providers\FortifyServiceProvider;
 
 class ToolsServiceProvider extends ServiceProvider
 {
