@@ -369,7 +369,10 @@
                                             <p><strong>Deze participant heeft zich al eerder geregistreed op {{$person->created_at->format('d-m-Y')}}.</strong></p>
                                         @endif
                                         <br/>
-                                        {{ $person->displayInformation() }}
+                                        <p><strong>Voornaam:</strong> {{ $person->firstName() }}</p>
+                                        <p><strong>Achternaam:</strong> {{ $person->lastName() }}</p>
+                                        <p><strong>Email:</strong> <a href="mailto:{{ $person->email() }}">{{ $person->email() }}</a></p>
+                                        <p><strong>Telefoon:</strong> {{ $person->tel() }}</p>
                                         <br/>
                                     </td>
                                 </tr>
