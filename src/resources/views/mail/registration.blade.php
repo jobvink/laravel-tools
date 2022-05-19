@@ -389,7 +389,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Onderzoek van het tools<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum</span>
+                                <span class="apple-link">Onderzoek van het LUMC<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum</span>
                             </td>
                         </tr>
                     </table>
