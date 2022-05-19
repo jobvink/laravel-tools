@@ -369,7 +369,7 @@
                                             <p><strong>Deze participant heeft zich al eerder geregistreed op {{$person->created_at->format('d-m-Y')}}.</strong></p>
                                         @endif
                                         <br/>
-                                        {{ $person->displayInformation() }}
+                                        {!! $person->displayInformation() !!}
                                         <br/>
                                     </td>
                                 </tr>
