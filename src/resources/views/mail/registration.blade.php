@@ -365,11 +365,11 @@
                                     <td>
                                         <h2><strong>Beste Medewerker,</strong></h2>
                                         <p>Er is zojuist een nieuwe participant geregistreerd via {{ $site }}:</p>
-                                        @if($mailable->isDuplicate())
-                                            <p><strong>Deze participant heeft zich al eerder geregistreed op {{$mailable->created_at->format('d-m-Y')}}.</strong></p>
+                                        @if($person->isDuplicate())
+                                            <p><strong>Deze participant heeft zich al eerder geregistreed op {{$person->created_at->format('d-m-Y')}}.</strong></p>
                                         @endif
                                         <br/>
-                                        {{ $mailable->displayInformation() }}
+                                        {{ $person->displayInformation() }}
                                         <br/>
                                     </td>
                                 </tr>

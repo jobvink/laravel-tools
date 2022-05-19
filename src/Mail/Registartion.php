@@ -36,8 +36,7 @@ class Registartion extends Mailable
             'title' => '',
             'preheader' => 'Er is een nieuwe registartie voor het acceptance-onderzoek',
             'site' => '',
-            'participant' => $this->participant,
-            'isDuplicate' => $this->participant->isDuplicate()
+            'person' => $this->participant
         ]);
     }
 }
