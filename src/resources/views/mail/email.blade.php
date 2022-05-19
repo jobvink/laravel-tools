@@ -367,8 +367,14 @@
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td>
-                                        <h2><strong>Beste {{ $mailable->fullName() }},</strong></h2>
-                                        {{ $content }}
+                                        <h2><strong>Beste {{ $person->fullName() }},</strong></h2>
+                                        <p>Via onze website heeft u zich aangemeld voor het perfect-fit onderzoek. Allereerst bedankt voor uw aanmelding, wij vinden het erg fijn dat u mee wilt doen.</p>
+                                        <p>Binnenkort nemen wij telefonisch contact met u op. Wij willen dan graag nog enkele vragen stellen om te bepalen of u in aanmerking komt voor het perfect-fit onderzoek.</p>
+                                        <p>Mocht u hier vragen over hebben dan kunt u deze tijdens het telefonisch contact stellen.</p>
+                                        <br>
+                                        <p>Met vriendelijke groet,</p>
+                                        <br>
+                                        <p>Het perfect-fit onderzoeksteam</p>
                                     </td>
                                 </tr>
                             </table>
@@ -384,7 +390,7 @@
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                             <td class="content-block">
-                                <span class="apple-link">Onderzoek van het tools en GPRI<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum en General Practitioners Research Institute</span>
+                                <span class="apple-link">Onderzoek van het LUMC<br/>&copy; {{date('Y')}} Leids Universitair Medisch Centrum</span>
                             </td>
                         </tr>
                     </table>

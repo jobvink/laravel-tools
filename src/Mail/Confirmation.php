@@ -5,6 +5,7 @@ namespace jobvink\tools\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use jobvink\tools\Contracts\Addressable;
 
 class Confirmation extends Mailable
 {
@@ -16,9 +17,9 @@ class Confirmation extends Mailable
      *
      * @return void
      */
-    public function __construct(Mailable $mailable)
+    public function __construct(Addressable $person)
     {
-        $this->mailable = $mailable;
+        $this->person = $person;
     }
 
     /**
@@ -31,14 +32,14 @@ class Confirmation extends Mailable
         $this->from([
             'address' => env('MAIL_FROM_ADDRESS'),
         ])->replyTo([
-            'address' => env('MAIL_FROM_ADDRESS'),
+            'address' => env('LUMC_MAIL'),
         ]);
 
-        $this->subject('Acceptance bevestiging');
+        $this->subject(env(''));
 
         return $this->view('tools::mail/email', [
-            'mailable' => $this->mailable,
-            'content' => '',
-        ])->attach(public_path() . '/documenten/Informatie deelname ACCEPTANCE onderzoek (v8.0).pdf');
+            'title' => 'Perfect fit registratie',
+            'person' => $this->person,
+        ]);
     }
 }
