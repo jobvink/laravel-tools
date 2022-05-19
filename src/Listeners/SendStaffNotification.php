@@ -26,7 +26,7 @@ class SendStaffNotification
      */
     public function handle(ParticipantEnrolled $event)
     {
-        $participant = $event->participant;
+        $participant = $event->person;
 
         Mail::to(env('LUMC_MAIL'))
             ->send(new Registartion($participant));

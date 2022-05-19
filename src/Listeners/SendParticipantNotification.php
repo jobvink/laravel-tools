@@ -26,7 +26,7 @@ class SendParticipantNotification
      */
     public function handle(ParticipantEnrolled $event)
     {
-        $participant = $event->participant;
+        $participant = $event->person;
 
         Mail::to($participant->email)
             ->send(new Confirmation($participant));
