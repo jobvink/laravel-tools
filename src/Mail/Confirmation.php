@@ -35,7 +35,7 @@ class Confirmation extends Mailable
             'address' => env('LUMC_MAIL'),
         ]);
 
-        $this->subject(env(''));
+        $this->subject(env('Bevestiging'));
 
         return $this->view('tools::mail/email', [
             'title' => 'Perfect fit registratie',

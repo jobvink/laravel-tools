@@ -30,11 +30,11 @@ class Registartion extends Mailable
     public function build()
     {
 
-        $this->subject('Acceptance nieuwe aanmelding');
+        $this->subject('Perfectfit nieuwe aanmelding');
 
         return $this->view('tools::mail/registration', [
             'title' => '',
-            'preheader' => 'Er is een nieuwe registartie voor het acceptance-onderzoek',
+            'preheader' => 'Er is een nieuwe registratie voor het acceptance-onderzoek',
             'site' => '',
             'person' => $this->participant
         ]);
