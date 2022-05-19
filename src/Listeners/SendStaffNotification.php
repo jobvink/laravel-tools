@@ -28,7 +28,7 @@ class SendStaffNotification
     {
         $participant = $event->participant;
 
-        Mail::to([env('LUMC_MAIL'), env('GPRI_MAIL')])
+        Mail::to(env('LUMC_MAIL'))
             ->send(new Registartion($participant));
     }
 }
