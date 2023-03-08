@@ -10,7 +10,7 @@
     ],
     "require": {
         "google/recaptcha": "^1.2",
-        "laravel/sanctum": "^2.14",
+        "laravel/sanctum": "^3.0",
         "laravel/fortify": "^1.12"
     },
     "autoload": {
